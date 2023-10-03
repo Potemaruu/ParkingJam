@@ -5,15 +5,20 @@ using UnityEngine;
 
 public class FlickScript : MonoBehaviour
 {
+    GameObject camera = null;
+
     Vector2 touchPos;
     RaycastHit _hit;
     GameObject carObject = null;
 
+    float cameraY;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        //カメラのY軸回転量を取得
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        cameraY = camera.transform.rotation.eulerAngles.y;
     }
 
     // Update is called once per frame
@@ -43,26 +48,24 @@ public class FlickScript : MonoBehaviour
             Vector2 releasePos = Input.mousePosition;
             Vector2 vec = releasePos - touchPos;
 
+            //カメラの向きを考慮する   
+            Quaternion rotation = Quaternion.Euler(0f, -cameraY, 0f);
+            Vector3 rotad = rotation * carObject.transform.forward;
+
             //forwardをvector2に変換
             Vector2 fo;
-            fo.x = carObject.transform.forward.x;
-            fo.y = carObject.transform.forward.z;
-
+            fo.x = rotad.x;
+            fo.y = rotad.z;
 
             //forwardとの内積が０以上なら前に進める
-            if (Vector2.Dot(vec, fo) > 0)
+            if (Vector2.Dot(vec.normalized, fo.normalized) > 0)
             {
-                //rb.AddForce(hitObject.transform.forward * 10, ForceMode.Impulse);
                 rb.velocity = carObject.transform.forward * 20;
-
             }
             else
             {
-                //rb.AddForce(-hitObject.transform.forward * 10, ForceMode.Impulse);
                 rb.velocity = -carObject.transform.forward * 20;
             }
-
-
             carObject = null;
         }
     }
