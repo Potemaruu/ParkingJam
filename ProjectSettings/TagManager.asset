@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Car
   - Curb
+  - Bar
   layers:
   - Default
   - TransparentFX
