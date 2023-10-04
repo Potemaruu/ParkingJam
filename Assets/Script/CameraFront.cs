@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFront : MonoBehaviour
 {
-
-    Camera mainCam;
+    private Camera mainCam;
 
     private void Start()
     {
@@ -20,6 +17,7 @@ public class CameraFront : MonoBehaviour
     // オブジェクトの向きをメインカメラの方向に向ける
     private void TurningImage()
     {
+        //絵文字をカメラに向ける
         transform.LookAt(mainCam.transform.position);
     }
 }

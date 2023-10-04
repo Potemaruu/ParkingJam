@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-    public GameObject emozi;
+    public GameObject sadface;
+    public GameObject funface;
     public Vector3 moveVec;
     // Start is called before the first frame update
     void Start()
@@ -20,14 +19,29 @@ public class Car : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Curb"))
+        //車か縁石に当たったら
+        if(collision.gameObject.CompareTag("Curb") || collision.gameObject.CompareTag("Car"))
         {
-            GameObject newObject = Instantiate(emozi, gameObject.transform.position + gameObject.transform.up * 4, Quaternion.identity);
+            //跳ね返らせる
+            gameObject.GetComponent<Rigidbody>().AddForce(moveVec * -80, ForceMode.Impulse);
+            //絵文字を出す
+            GameObject newObject = Instantiate(sadface, gameObject.transform.position + gameObject.transform.up * 4, Quaternion.identity);
             newObject.transform.parent = transform;
             Destroy(newObject, 1.0f);
-            gameObject.GetComponent<Rigidbody>().AddForce(moveVec * -80, ForceMode.Impulse);
         }
         moveVec = Vector3.zero;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //バーに当たったら
+        if (other.gameObject.CompareTag("Bar"))
+        {
+            //絵文字を出す
+            GameObject newObject = Instantiate(funface, gameObject.transform.position + gameObject.transform.up * 4, Quaternion.identity);
+            newObject.transform.parent = transform;
+            Destroy(newObject, 1.0f);
+        }
 
     }
 }
