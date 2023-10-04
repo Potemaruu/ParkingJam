@@ -44,6 +44,8 @@ public class FlickScript : MonoBehaviour
         {
             Rigidbody rb = carObject.GetComponent<Rigidbody>();
 
+            Car car = carObject.GetComponent<Car>();
+
             //スワイプの方向を取得
             Vector2 releasePos = Input.mousePosition;
             Vector2 vec = releasePos - touchPos;
@@ -60,11 +62,14 @@ public class FlickScript : MonoBehaviour
             //forwardとの内積が０以上なら前に進める
             if (Vector2.Dot(vec.normalized, fo.normalized) > 0)
             {
-                rb.velocity = carObject.transform.forward * 20;
+                //rb.velocity = carObject.transform.forward * 20;
+                car.moveVec = carObject.transform.forward * 0.05f;
             }
             else
             {
-                rb.velocity = -carObject.transform.forward * 20;
+                //rb.velocity = -carObject.transform.forward * 20;
+                car.moveVec = -carObject.transform.forward * 0.05f;
+
             }
             carObject = null;
         }
