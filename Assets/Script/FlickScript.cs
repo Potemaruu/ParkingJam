@@ -51,7 +51,7 @@ public class FlickScript : MonoBehaviour
             Quaternion rotation = Quaternion.Euler(0f, -cameraY, 0f);
             Vector3 rotad = rotation * carObject.transform.forward;
 
-            //forward‚ðvector2‚É•ÏŠ·
+            //vector2‚É•ÏŠ·
             Vector2 fo;
             fo.x = rotad.x;
             fo.y = rotad.z;
@@ -60,11 +60,14 @@ public class FlickScript : MonoBehaviour
             if (Vector2.Dot(vec.normalized, fo.normalized) > 0)
             {
                 //rb.velocity = carObject.transform.forward * 20;
+                //carObject.transform.Translate(carObject.transform.forward * 50.0f * Time.deltaTime, Space.World);
                 car.moveVec = carObject.transform.forward * 0.05f;
             }
             else
             {
                 //rb.velocity = -carObject.transform.forward * 20;
+                //carObject.transform.Translate(-carObject.transform.forward * 50.0f * Time.deltaTime, Space.World);
+
                 car.moveVec = -carObject.transform.forward * 0.05f;
 
             }

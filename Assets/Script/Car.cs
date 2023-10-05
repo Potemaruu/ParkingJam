@@ -42,6 +42,5 @@ public class Car : MonoBehaviour
             newObject.transform.parent = transform;
             Destroy(newObject, 1.0f);
         }
-
-    }
+	}
 }
