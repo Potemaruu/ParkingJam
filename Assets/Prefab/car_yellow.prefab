@@ -168,4 +168,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sadface: {fileID: 9206962665574745463, guid: b9c0c7aa41be0014987c2b02902e3dda, type: 3}
   funface: {fileID: 9139140567824028041, guid: 64753fc59b17a1e4c804e05359fa6838, type: 3}
+  coin: {fileID: 4603989535316573367, guid: 2406706497c52f9449ebe2e0f662584c, type: 3}
   moveVec: {x: 0, y: 0, z: 0}
+  onRoad: 0

@@ -59,17 +59,11 @@ public class FlickScript : MonoBehaviour
             //forward‚Æ‚Ì“àÏ‚ª‚OˆÈã‚È‚ç‘O‚Éi‚ß‚é
             if (Vector2.Dot(vec.normalized, fo.normalized) > 0)
             {
-                //rb.velocity = carObject.transform.forward * 20;
-                //carObject.transform.Translate(carObject.transform.forward * 50.0f * Time.deltaTime, Space.World);
-                car.moveVec = carObject.transform.forward * 0.05f;
+                car.moveVec = carObject.transform.forward * 20.0f;
             }
             else
             {
-                //rb.velocity = -carObject.transform.forward * 20;
-                //carObject.transform.Translate(-carObject.transform.forward * 50.0f * Time.deltaTime, Space.World);
-
-                car.moveVec = -carObject.transform.forward * 0.05f;
-
+                car.moveVec = -carObject.transform.forward * 20.0f;
             }
             carObject = null;
         }

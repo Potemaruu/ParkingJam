@@ -6,6 +6,7 @@ public class Bar : MonoBehaviour
 
     private bool isRotation = false;
     private bool isUp = false;
+    private float waitTime = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,22 +23,31 @@ public class Bar : MonoBehaviour
             if (isUp)
             {
                 //è„è∏íÜ
-                pivot.transform.Rotate(0.0f, 0.0f, -180.0f * Time.deltaTime);
-                if (transform.rotation.eulerAngles.z <= 270.0f)
+                if (Mathf.Abs(180 - transform.rotation.eulerAngles.z) <= 90.0f)
                 {
-                    isUp = false;
-                }
-            }
+					waitTime -= Time.deltaTime;
+					if (waitTime < 0)
+					{
+						isUp = false;
+					}
+				}
+				else
+                {
+					pivot.transform.Rotate(0.0f, 0.0f, -180.0f * Time.deltaTime);
+				}
+			}
             else
             {
                 //â∫ç~íÜ
-                pivot.transform.Rotate(0.0f, 0.0f, 180.0f * Time.deltaTime);
-                if (transform.rotation.eulerAngles.z >= 359.0f)
+				if (Mathf.Abs(90 - transform.rotation.eulerAngles.z) <= 90.0f)
+				{
+					 isRotation = false;
+				}
+                else
                 {
-
-                    isRotation = false;
-                }
-            }
+					pivot.transform.Rotate(0.0f, 0.0f, 180.0f * Time.deltaTime);
+				}
+			}
 
         }
     }
@@ -46,5 +56,6 @@ public class Bar : MonoBehaviour
     {
         isRotation = true;
         isUp = true;
+        waitTime = 0.5f;
     }
 }
