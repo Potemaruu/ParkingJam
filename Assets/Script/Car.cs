@@ -10,6 +10,9 @@ public class Car : MonoBehaviour
     public bool onRoad = false;
 
     private bool alreadyCoin = false;
+    private bool shake = false;
+    private Vector3 shakeaxis = Vector3.zero;
+    private float shaketime = 1.0f;
     void Start()
     {
         moveVec = Vector3.zero;
@@ -19,6 +22,20 @@ public class Car : MonoBehaviour
     void Update()
     {
         transform.position += moveVec * Time.deltaTime;
+
+        if(shake)
+        {
+            Quaternion rotation = Quaternion.AngleAxis(10.0f, shakeaxis);
+            transform.rotation = rotation;
+            Debug.Log("‰ñ‚Á‚Ä‚é");
+
+            shaketime -= Time.deltaTime;
+            if(shaketime < 0 )
+            {
+                shake = false;
+                shaketime = 1.0f;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -49,6 +66,14 @@ public class Car : MonoBehaviour
                     {
                         //ŠG•¶Žš‚ðo‚·
                         CreateEmoji(sadface);
+
+                        //—h‚ç‚·
+                        foreach(ContactPoint contact in collision.contacts) 
+                        {
+                            Vector3 shakeaxis = contact.normal;
+                            shakeaxis = new Vector3(-shakeaxis.z, 0.0f, shakeaxis.x);
+                            shake = true;
+                        }
 					}
 				}
             }
