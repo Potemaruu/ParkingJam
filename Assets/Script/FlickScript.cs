@@ -37,7 +37,7 @@ public class FlickScript : MonoBehaviour
             }
             touchPos = Input.mousePosition;
         }
-        else if (Input.GetMouseButtonUp(0) && carObject != null)
+        else if (Input.GetMouseButton(0) && carObject != null && Vector2.Distance(new Vector3(touchPos.x, touchPos.y, 0.0f), Input.mousePosition) > 40.0f)
         {
             Rigidbody rb = carObject.GetComponent<Rigidbody>();
 
