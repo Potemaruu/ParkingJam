@@ -11,7 +11,7 @@ public class Car : MonoBehaviour
 
     private bool alreadyCoin = false;
     private bool shake = false;
-    //private Vector3 shakeaxis = Vector3.zero;
+    private Vector3 shakeaxis = Vector3.zero;
     private float shaketime = 0.3f;
     void Start()
     {
@@ -22,19 +22,19 @@ public class Car : MonoBehaviour
     void Update()
     {
         transform.position += moveVec * Time.deltaTime;
-
+        float angley = transform.rotation.eulerAngles.y;
         if(shake)
         {
             Quaternion rotation;
             if(transform.rotation.eulerAngles.y == 90.0f || transform.rotation.eulerAngles.y == 270.0f)
             {
-                rotation = Quaternion.Euler(Random.Range(-3.0f, 3.0f), transform.rotation.eulerAngles.y, 0.0f);
+                rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), shakeaxis);
             }
             else
             {
-                rotation = Quaternion.Euler(0.0f, transform.rotation.eulerAngles.y, Random.Range(-3.0f, 3.0f));
+                rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), shakeaxis);
             }
-
+            rotation = Quaternion.Euler(rotation.eulerAngles.x, angley, rotation.eulerAngles.z);
             transform.rotation = rotation;
             shaketime -= Time.deltaTime;
             //óhÇÍÇÃèIÇÌÇË
@@ -54,6 +54,8 @@ public class Car : MonoBehaviour
         {
             //íµÇÀï‘ÇÁÇπÇÈ
             gameObject.GetComponent<Rigidbody>().AddForce(moveVec.normalized * -4f, ForceMode.Impulse);
+            Curb curb = collision.gameObject.GetComponent<Curb>();
+            curb.Shake();
         }
         else
         {
@@ -80,6 +82,7 @@ public class Car : MonoBehaviour
                         foreach(ContactPoint contact in collision.contacts) 
                         {
                             shake = true;
+                            shakeaxis = contact.normal;
                         }
 					}
 				}

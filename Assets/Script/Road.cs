@@ -35,7 +35,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             if(collisoinaxisX)
             {
-                if(Mathf.Abs(transform.position.z - other.transform.position.z) < 0.7f)
+                if(Mathf.Abs(transform.position.z - other.transform.position.z) < 0.5f)
                 {
                     other.transform.LookAt(new Vector3(nextPos.position.x, other.transform.position.y, nextPos.position.z));
                     Car car = other.GetComponent<Car>();
@@ -47,7 +47,7 @@ public class NewBehaviourScript : MonoBehaviour
             }
             else
             {
-                if (Mathf.Abs(transform.position.x - other.transform.position.x) < 0.7f)
+                if (Mathf.Abs(transform.position.x - other.transform.position.x) < 0.5f)
                 {
                     other.transform.LookAt(new Vector3(nextPos.position.x, other.transform.position.y, nextPos.position.z));
                     Car car = other.GetComponent<Car>();
