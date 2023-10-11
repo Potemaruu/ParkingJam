@@ -18,7 +18,7 @@ public class Curb : MonoBehaviour
         if (shake)
         {
             Quaternion rotation;
-            rotation = Quaternion.Euler(Random.Range(-3.0f, 3.0f), transform.rotation.eulerAngles.y, 0.0f);
+            rotation = Quaternion.Euler(Random.Range(-10.0f, 10.0f), transform.rotation.eulerAngles.y, 0.0f);
 
             transform.rotation = rotation;
 

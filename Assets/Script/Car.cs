@@ -26,14 +26,15 @@ public class Car : MonoBehaviour
         if(shake)
         {
             Quaternion rotation;
-            if(transform.rotation.eulerAngles.y == 90.0f || transform.rotation.eulerAngles.y == 270.0f)
-            {
-                rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), shakeaxis);
-            }
-            else
-            {
-                rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), shakeaxis);
-            }
+            rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), shakeaxis);
+            //if (transform.rotation.eulerAngles.y == 90.0f || transform.rotation.eulerAngles.y == 270.0f)
+            //{
+            //    rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), shakeaxis);
+            //}
+            //else
+            //{
+            //    rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), shakeaxis);
+            //}
             rotation = Quaternion.Euler(rotation.eulerAngles.x, angley, rotation.eulerAngles.z);
             transform.rotation = rotation;
             shaketime -= Time.deltaTime;
@@ -83,6 +84,7 @@ public class Car : MonoBehaviour
                         {
                             shake = true;
                             shakeaxis = contact.normal;
+                            shakeaxis = new Vector3(-shakeaxis.z, shakeaxis.y, shakeaxis.x);
                         }
 					}
 				}
