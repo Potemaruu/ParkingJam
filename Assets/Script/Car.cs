@@ -11,8 +11,8 @@ public class Car : MonoBehaviour
 
     private bool alreadyCoin = false;
     private bool shake = false;
-    private Vector3 shakeaxis = Vector3.zero;
-    private float shaketime = 0.5f;
+    //private Vector3 shakeaxis = Vector3.zero;
+    private float shaketime = 0.3f;
     void Start()
     {
         moveVec = Vector3.zero;
@@ -25,15 +25,23 @@ public class Car : MonoBehaviour
 
         if(shake)
         {
-            Quaternion rotation = Quaternion.AngleAxis(Random.Range(-5.0f, 5.0f), shakeaxis);
-            transform.rotation = rotation;
+            Quaternion rotation;
+            if(transform.rotation.eulerAngles.y == 90.0f || transform.rotation.eulerAngles.y == 270.0f)
+            {
+                rotation = Quaternion.Euler(Random.Range(-3.0f, 3.0f), transform.rotation.eulerAngles.y, 0.0f);
+            }
+            else
+            {
+                rotation = Quaternion.Euler(0.0f, transform.rotation.eulerAngles.y, Random.Range(-3.0f, 3.0f));
+            }
 
+            transform.rotation = rotation;
             shaketime -= Time.deltaTime;
             //óhÇÍÇÃèIÇÌÇË
-            if(shaketime < 0 )
+            if (shaketime < 0)
             {
                 shake = false;
-                shaketime = 0.5f;
+                shaketime = 0.3f;
                 transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             }
         }
@@ -71,8 +79,6 @@ public class Car : MonoBehaviour
                         //óhÇÁÇ∑
                         foreach(ContactPoint contact in collision.contacts) 
                         {
-                            shakeaxis = contact.normal;
-                            shakeaxis = new Vector3(-shakeaxis.z, 0.0f, shakeaxis.x);
                             shake = true;
                         }
 					}
