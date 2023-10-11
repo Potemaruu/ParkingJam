@@ -6,6 +6,8 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
     public GameObject nextRoad = null;
+    public bool collisoinaxisX = false;
+
     private Transform nextPos = null;
 
     // Start is called before the first frame update
@@ -31,14 +33,40 @@ public class NewBehaviourScript : MonoBehaviour
         }
 		if(other.gameObject.CompareTag("Car"))
         {
-			if ((transform.position - other.transform.position).magnitude < new Vector3(0.6f, 0.0f, 0.0f).magnitude)
+            if(collisoinaxisX)
             {
-				other.transform.LookAt(new Vector3(nextPos.position.x, other.transform.position.y, nextPos.position.z));
-				Car car = other.GetComponent<Car>();
-                car.moveVec = other.transform.forward * 20.0f;
-                car.onRoad = true;
-                car.SetCoin();
-			}
+                if(Mathf.Abs(transform.position.z - other.transform.position.z) < 0.5f)
+                {
+                    other.transform.LookAt(new Vector3(nextPos.position.x, other.transform.position.y, nextPos.position.z));
+                    Car car = other.GetComponent<Car>();
+                    car.moveVec = other.transform.forward * 20.0f;
+                    car.onRoad = true;
+                    car.SetCoin();
+
+                }
+            }
+            else
+            {
+                if (Mathf.Abs(transform.position.x - other.transform.position.x) < 0.5f)
+                {
+                    other.transform.LookAt(new Vector3(nextPos.position.x, other.transform.position.y, nextPos.position.z));
+                    Car car = other.GetComponent<Car>();
+                    car.moveVec = other.transform.forward * 20.0f;
+                    car.onRoad = true;
+                    car.SetCoin();
+
+                }
+
+            }
+
+   //         if ((transform.position - other.transform.position).magnitude < new Vector3(0.6f, 0.0f, 0.0f).magnitude)
+   //         {
+			//	other.transform.LookAt(new Vector3(nextPos.position.x, other.transform.position.y, nextPos.position.z));
+			//	Car car = other.GetComponent<Car>();
+   //             car.moveVec = other.transform.forward * 20.0f;
+   //             car.onRoad = true;
+   //             car.SetCoin();
+			//}
 
 		}
 	}
