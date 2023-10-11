@@ -35,7 +35,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             if(collisoinaxisX)
             {
-                if(Mathf.Abs(transform.position.z - other.transform.position.z) < 0.5f)
+                if(Mathf.Abs(transform.position.z - other.transform.position.z) < 0.7f)
                 {
                     other.transform.LookAt(new Vector3(nextPos.position.x, other.transform.position.y, nextPos.position.z));
                     Car car = other.GetComponent<Car>();
@@ -47,7 +47,7 @@ public class NewBehaviourScript : MonoBehaviour
             }
             else
             {
-                if (Mathf.Abs(transform.position.x - other.transform.position.x) < 0.5f)
+                if (Mathf.Abs(transform.position.x - other.transform.position.x) < 0.7f)
                 {
                     other.transform.LookAt(new Vector3(nextPos.position.x, other.transform.position.y, nextPos.position.z));
                     Car car = other.GetComponent<Car>();
@@ -58,16 +58,6 @@ public class NewBehaviourScript : MonoBehaviour
                 }
 
             }
-
-   //         if ((transform.position - other.transform.position).magnitude < new Vector3(0.6f, 0.0f, 0.0f).magnitude)
-   //         {
-			//	other.transform.LookAt(new Vector3(nextPos.position.x, other.transform.position.y, nextPos.position.z));
-			//	Car car = other.GetComponent<Car>();
-   //             car.moveVec = other.transform.forward * 20.0f;
-   //             car.onRoad = true;
-   //             car.SetCoin();
-			//}
-
 		}
 	}
 }

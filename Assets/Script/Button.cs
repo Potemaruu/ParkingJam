@@ -18,7 +18,11 @@ public class Button : MonoBehaviour
 
     public void NextScene()
     {
-        Debug.Log("NextScene");
         SceneManager.LoadScene(nextScene);
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

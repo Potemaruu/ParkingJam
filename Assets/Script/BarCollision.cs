@@ -20,7 +20,7 @@ public class BarCollision : MonoBehaviour
 
     private void OnTriggerEnter(UnityEngine.Collider other)
     {
-        Destroy(other.gameObject, 3.0f);
+        Destroy(other.gameObject, 5.0f);
         //è’ìÀîªíË
         bar.MyTriggerEnter();
     }
