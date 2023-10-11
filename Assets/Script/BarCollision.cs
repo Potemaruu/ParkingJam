@@ -20,6 +20,7 @@ public class BarCollision : MonoBehaviour
 
     private void OnTriggerEnter(UnityEngine.Collider other)
     {
+        Destroy(other.gameObject, 3.0f);
         //Õ“Ë”»’è
         bar.MyTriggerEnter();
     }

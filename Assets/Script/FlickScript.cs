@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FlickScript : MonoBehaviour
 {
-    GameObject camera = null;
+    GameObject mainCamera = null;
 
     Vector2 touchPos;
     RaycastHit _hit;
@@ -14,8 +14,8 @@ public class FlickScript : MonoBehaviour
     void Start()
     {
         //ƒJƒƒ‰‚ÌY²‰ñ“]—Ê‚ğæ“¾
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
-        cameraY = camera.transform.rotation.eulerAngles.y;
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        cameraY = mainCamera.transform.rotation.eulerAngles.y;
     }
 
     // Update is called once per frame

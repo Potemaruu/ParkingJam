@@ -8,10 +8,12 @@ public class Bar : MonoBehaviour
     private bool isUp = false;
     private float waitTime = 0.5f;
 
+    public GameObject empty = null;
+    private CarCount carCount = null;
     // Start is called before the first frame update
     void Start()
     {
-
+        carCount = empty.GetComponent<CarCount>();
     }
 
     // Update is called once per frame
@@ -57,5 +59,7 @@ public class Bar : MonoBehaviour
         isRotation = true;
         isUp = true;
         waitTime = 0.5f;
+
+        carCount.carcount--;
     }
 }
