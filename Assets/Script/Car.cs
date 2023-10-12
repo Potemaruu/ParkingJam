@@ -13,29 +13,33 @@ public class Car : MonoBehaviour
     private bool shake = false;
     private Vector3 shakeaxis = Vector3.zero;
     private float shaketime = 0.3f;
+    private Quaternion angle;
     void Start()
     {
         moveVec = Vector3.zero;
+        angle = transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //à⁄ìÆèàóù
         transform.position += moveVec * Time.deltaTime;
-        float angley = transform.rotation.eulerAngles.y;
         if(shake)
         {
             Quaternion rotation;
             rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), shakeaxis);
-            //if (transform.rotation.eulerAngles.y == 90.0f || transform.rotation.eulerAngles.y == 270.0f)
-            //{
-            //    rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), shakeaxis);
-            //}
-            //else
-            //{
-            //    rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), shakeaxis);
-            //}
-            rotation = Quaternion.Euler(rotation.eulerAngles.x, angley, rotation.eulerAngles.z);
+            if (shakeaxis == transform.right || shakeaxis == -transform.right)
+            {
+                //ç∂âEÇ©ÇÁìñÇΩÇ¡ÇΩ
+                rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), Vector3.forward);
+            }
+            else if(shakeaxis == transform.forward || shakeaxis == -transform.forward)
+            {
+                //ëOå„Ç©ÇÁìñÇΩÇ¡ÇΩ
+                rotation = Quaternion.AngleAxis(Random.Range(-3.0f, 3.0f), Vector3.right);
+            }
+            rotation = Quaternion.Euler(rotation.eulerAngles.x, angle.eulerAngles.y, rotation.eulerAngles.z);
             transform.rotation = rotation;
             shaketime -= Time.deltaTime;
             //óhÇÍÇÃèIÇÌÇË
@@ -43,7 +47,7 @@ public class Car : MonoBehaviour
             {
                 shake = false;
                 shaketime = 0.3f;
-                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+                transform.rotation = angle;
             }
         }
     }
@@ -54,7 +58,7 @@ public class Car : MonoBehaviour
         if(collision.gameObject.CompareTag("Curb"))
         {
             //íµÇÀï‘ÇÁÇπÇÈ
-            gameObject.GetComponent<Rigidbody>().AddForce(moveVec.normalized * -4f, ForceMode.Impulse);
+            gameObject.GetComponent<Rigidbody>().AddForce(moveVec.normalized * -5f, ForceMode.Impulse);
             Curb curb = collision.gameObject.GetComponent<Curb>();
             curb.Shake();
         }
@@ -64,7 +68,7 @@ public class Car : MonoBehaviour
             if(collision.gameObject.CompareTag("Car"))
             {
 				//íµÇÀï‘ÇÁÇπÇÈ
-				gameObject.GetComponent<Rigidbody>().AddForce(moveVec.normalized * -4f, ForceMode.Impulse);
+				gameObject.GetComponent<Rigidbody>().AddForce(moveVec.normalized * -5f, ForceMode.Impulse);
 
 				Car car = collision.gameObject.GetComponent<Car>();
                 if(car.onRoad)
@@ -84,7 +88,7 @@ public class Car : MonoBehaviour
                         {
                             shake = true;
                             shakeaxis = contact.normal;
-                            shakeaxis = new Vector3(-shakeaxis.z, shakeaxis.y, shakeaxis.x);
+                            //shakeaxis = new Vector3(-shakeaxis.z, shakeaxis.y, shakeaxis.x);
                         }
 					}
 				}
