@@ -171,3 +171,4 @@ MonoBehaviour:
   coin: {fileID: 4603989535316573367, guid: 2406706497c52f9449ebe2e0f662584c, type: 3}
   moveVec: {x: 0, y: 0, z: 0}
   onRoad: 0
+  smoke: {fileID: 764577036108577144, guid: b34ede3f94594574d995e78b25eebcad, type: 3}

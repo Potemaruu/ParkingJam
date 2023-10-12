@@ -8,6 +8,7 @@ public class Car : MonoBehaviour
     public GameObject coin;
     public Vector3 moveVec;
     public bool onRoad = false;
+    public GameObject smoke;
 
     private bool alreadyCoin = false;
     private bool shake = false;
@@ -57,6 +58,11 @@ public class Car : MonoBehaviour
         //縁石に当たったら
         if(collision.gameObject.CompareTag("Curb"))
         {
+            //パーティクル生成
+            GameObject par = Instantiate(smoke, transform.position + moveVec * 0.09f, Quaternion.identity);
+            par.transform.rotation = Quaternion.Euler(0.0f, transform.rotation.eulerAngles.y, 0.0f);
+            Destroy(par, 2.0f);
+
             //跳ね返らせる
             gameObject.GetComponent<Rigidbody>().AddForce(moveVec.normalized * -5f, ForceMode.Impulse);
             Curb curb = collision.gameObject.GetComponent<Curb>();
@@ -67,8 +73,9 @@ public class Car : MonoBehaviour
             //車に当たったら
             if(collision.gameObject.CompareTag("Car"))
             {
-				//跳ね返らせる
-				gameObject.GetComponent<Rigidbody>().AddForce(moveVec.normalized * -5f, ForceMode.Impulse);
+
+                //跳ね返らせる
+                gameObject.GetComponent<Rigidbody>().AddForce(moveVec.normalized * -5f, ForceMode.Impulse);
 
 				Car car = collision.gameObject.GetComponent<Car>();
                 if(car.onRoad)
@@ -91,7 +98,15 @@ public class Car : MonoBehaviour
                             //shakeaxis = new Vector3(-shakeaxis.z, shakeaxis.y, shakeaxis.x);
                         }
 					}
-				}
+                    else
+                    {
+                        //パーティクル生成
+                        GameObject par = Instantiate(smoke, transform.position + moveVec * 0.09f, Quaternion.identity);
+                        par.transform.rotation = Quaternion.Euler(0.0f, transform.rotation.eulerAngles.y, 0.0f);
+                        Destroy(par, 2.0f);
+
+                    }
+                }
             }
         }
         moveVec = Vector3.zero;

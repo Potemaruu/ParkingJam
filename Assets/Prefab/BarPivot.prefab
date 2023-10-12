@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 5046674041063242860}
+  empty: {fileID: 0}
 --- !u!1 &5046674041063242860
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,3 +197,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84fe411718a2844998a01a78df36c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particle: {fileID: 4675711864647690613, guid: ed120373906a37f45a3d6f615cc3d592,
+    type: 3}
