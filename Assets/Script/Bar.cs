@@ -7,6 +7,7 @@ public class Bar : MonoBehaviour
     private bool isRotation = false;
     private bool isUp = false;
     private float waitTime = 0.5f;
+    private Quaternion initRotation = Quaternion.identity;
 
     public GameObject empty = null;
     private CarCount carCount = null;
@@ -14,6 +15,7 @@ public class Bar : MonoBehaviour
     void Start()
     {
         carCount = empty.GetComponent<CarCount>();
+        initRotation = pivot.transform.rotation;
     }
 
     // Update is called once per frame
@@ -43,7 +45,8 @@ public class Bar : MonoBehaviour
                 //â∫ç~íÜ
 				if (Mathf.Abs(90 - transform.rotation.eulerAngles.z) <= 90.0f)
 				{
-					 isRotation = false;
+			        isRotation = false;
+                    pivot.transform.rotation = initRotation;
 				}
                 else
                 {
